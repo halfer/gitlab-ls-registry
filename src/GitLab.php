@@ -18,12 +18,12 @@ class GitLab
     protected $projectName;
     protected $privateToken;
     protected $pageNo = 1;
-    protected $resultsPerPage;
+    protected $resultsPerPage = 10;
 
     // Internals
     protected $curl;
-    protected $registryInfo;
-    protected $imageInfo;
+    protected $registryInfo = [];
+    protected $imageInfo = [];
 
     public function __construct($userName, $projectName, $privateToken = null)
     {
@@ -32,6 +32,14 @@ class GitLab
         $this->privateToken = $privateToken;
     }
 
+    /**
+     * Sets the current page number
+     *
+     * @todo Throw error if 0 or less than zero
+     *
+     * @param integer $pageNo
+     * @return $this
+     */
     public function setPageNo($pageNo)
     {
         $this->pageNo = (int) $pageNo;
@@ -39,9 +47,17 @@ class GitLab
         return $this;
     }
 
+    /**
+     * Sets the number of results to return per page
+     *
+     * @todo Throw error if 0 or less than zero
+     *
+     * @param integer $resultsPerPage
+     * @return $this
+     */
     public function setResultsPerPage($resultsPerPage)
     {
-        $this->resultsPerPage = $resultsPerPage;
+        $this->resultsPerPage = (int) $resultsPerPage;
 
         return $this;
     }
@@ -69,7 +85,11 @@ class GitLab
         return $this;
     }
 
-    // @todo Needs an exception if registryInfo is not set
+    /**
+     * Returns the currently known information about the registry
+     *
+     * @return array
+     */
     public function getRegistryInfo()
     {
         return $this->registryInfo;
@@ -77,12 +97,12 @@ class GitLab
 
     /**
      * Does a curl fetch of the image list data
-     *
-     * @todo Needs a page number and page size integrating
      */
     public function fetchImageList()
     {
-        $url = $this->getRegistryUrl();
+        $url = $this->getRegistryUrl() . 
+            '&page=' . $this->getPageNo() .
+            '&per_page=' . $this->getResultsPerPage();
         $imageInfo = $this->curl($url);
 
         if (!is_array($imageInfo))
@@ -115,9 +135,30 @@ class GitLab
         return $this;
     }
 
-    public function sort($key)
+    /**
+     * Sorting system for registry data
+     *
+     * @todo Implement asc/desc sorting
+     * @todo Throw an error if the specified key does not exist on either side
+     *
+     * @param string $key
+     * @param boolean $ascending
+     */
+    public function sortImageList($key, $ascending = true)
     {
-        throw new \RuntimeException('Not implemented yet');
+        usort($this->imageInfo, function($a, $b) use ($key)
+        {
+            $va = isset($a[$key]) ? $a[$key] : null;
+            $vb = isset($b[$key]) ? $b[$key] : null;
+            if ($va == $vb)
+            {
+                return 0;
+            }
+
+            return ($va < $vb) ? -1 : 1;
+        });
+
+        return $this;
     }
 
     /**
@@ -184,5 +225,15 @@ class GitLab
     protected function getPrivateToken()
     {
         return $this->privateToken;
+    }
+
+    protected function getPageNo()
+    {
+        return $this->pageNo;
+    }
+
+    protected function getResultsPerPage()
+    {
+        return $this->resultsPerPage;
     }
 }
