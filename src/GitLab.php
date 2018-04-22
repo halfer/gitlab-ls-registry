@@ -121,16 +121,30 @@ class GitLab
      * (This is useful as I don't think the JSON endpoint supports sorting,
      * so we have to get everything and then sort it ourselves).
      *
+     * @todo Throw an error if we reach the max calls without breaking
+     *
      * @param int $maxCalls
      */
-    public function retrieveAllImages($maxCalls = 20)
+    public function fetchAllImages($maxCalls = 20)
     {
-        $data = [];
+        $imageInfo = [];
         for($page = 1; $page <= $maxCalls; $page++)
         {
-            $this->setPageNo($page);
-            $data = array_merge($data, $this->getImageList());
+            $this
+                ->setPageNo($page)
+                ->fetchImageList();
+            $slice = $this->getImageList();
+            $imageInfo = array_merge($imageInfo, $slice);
+
+            // Know when to quit
+            if (count($slice) < $this->getResultsPerPage())
+            {
+                break;
+            }
         }
+
+        // Overwrite the last slice with the whole lot
+        $this->imageInfo = $imageInfo;
 
         return $this;
     }
