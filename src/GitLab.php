@@ -22,7 +22,8 @@ class GitLab
 
     // Internals
     protected $curl;
-    protected $tagsUrl;
+    protected $registryInfo;
+    protected $imageInfo;
 
     public function __construct($userName, $projectName, $privateToken = null)
     {
@@ -45,7 +46,7 @@ class GitLab
         return $this;
     }
 
-    public function getRegistryInfo()
+    public function fetchRegistryInfo()
     {
         $url = $this->getBaseUrl() . '/container_registry.json';
         $data = $this->curl($url);
@@ -62,24 +63,71 @@ class GitLab
             throw new GeneralError('Cannot find the registry base URL');
         }
 
-        // Capture the URL for this registry
-        $this->tagsUrl = self::BASE_DOMAIN . $registry['tags_path'];
+        // Capture the registry info
+        $this->registryInfo = $registry;
 
-        return $data;
+        return $this;
     }
 
-    public function getImageList()
+    // @todo Needs an exception if registryInfo is not set
+    public function getRegistryInfo()
+    {
+        return $this->registryInfo;
+    }
+
+    /**
+     * Does a curl fetch of the image list data
+     *
+     * @todo Needs a page number and page size integrating
+     */
+    public function fetchImageList()
     {
         $url = $this->getRegistryUrl();
-        $data = $this->curl($url);
-        print_r($data);
+        $imageInfo = $this->curl($url);
 
-        return $data;
+        if (!is_array($imageInfo))
+        {
+            throw new GeneralError("Cannot fetch an image list from the registry");
+        }
+
+        $this->imageInfo = $imageInfo;
+
+        return $this;
     }
 
-    public function getAllImages($maxCalls = 20)
+    /**
+     * Calls getImageList repeatedly until no more data is returned
+     *
+     * (This is useful as I don't think the JSON endpoint supports sorting,
+     * so we have to get everything and then sort it ourselves).
+     *
+     * @param int $maxCalls
+     */
+    public function retrieveAllImages($maxCalls = 20)
     {
-        // Call getImageList repeatedly until no more data is returned
+        $data = [];
+        for($page = 1; $page <= $maxCalls; $page++)
+        {
+            $this->setPageNo($page);
+            $data = array_merge($data, $this->getImageList());
+        }
+
+        return $this;
+    }
+
+    public function sort($key)
+    {
+        throw new \RuntimeException('Not implemented yet');
+    }
+
+    /**
+     * Gets the currently known image list data
+     *
+     * @return array
+     */
+    public function getImageList()
+    {
+        return $this->imageInfo;
     }
 
     protected function curl($url, $convertJson = true)
@@ -113,7 +161,9 @@ class GitLab
 
     protected function getRegistryUrl()
     {
-        return $this->tagsUrl;
+        $registryInfo = $this->getRegistryInfo();
+
+        return self::BASE_DOMAIN . $registryInfo['tags_path'];
     }
 
     protected function getBaseUrl()
