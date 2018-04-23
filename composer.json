@@ -1,0 +1,8 @@
+{
+    "name": "halfer/docker-ls-registry",
+    "autoload": {
+        "psr-0": {
+            "DockerLs": "src/"
+        }
+    }
+}

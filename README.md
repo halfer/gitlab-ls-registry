@@ -137,4 +137,3 @@ Improvements
 
 * A descending sort mode
 * A console binary with switches
-* Autoloading of main classes
