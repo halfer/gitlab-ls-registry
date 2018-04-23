@@ -82,6 +82,13 @@ If successful, either approach will result in an array of arrays that look like 
     [created_at] => 2018-04-22T12:23:57.707+00:00
     [destroy_path] => /jonuser/my-wordpress/registry/repository/84654/tags/v1.01
 
+Testing
+---
+
+This code was tested on the free version of [hosted GitLab](https://about.gitlab.com/pricing/#gitlab-com).
+I would expect it to work on paid versions in the cloud as well. I have not tested this
+on a self-hosted instance.
+
 Improvements
 ---
 
