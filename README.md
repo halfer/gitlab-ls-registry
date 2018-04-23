@@ -84,6 +84,9 @@ This will return data that looks like this:
         [destroy_path] => /jonuser/my-wordpress/container_registry/12345.json
     )
 
+Note that to fetch image data, it is mandatory to fetch registry information first. This
+is necessary to get the URL in `tags_path`, which is used to query registry data.
+
 Getting images information
 ---
 
