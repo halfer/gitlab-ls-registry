@@ -8,6 +8,19 @@ the official GitLab API. They may be a better way to do this, let me know if so!
 It is a work in progress, but the classes that do exist are pretty self-explanatory.
 Use an IDE to get auto-complete on the `GitLab` class.
 
+Private registries
+---
+
+If you have a private registry, you'll need to create a
+[Personal Access Token](https://gitlab.com/profile/personal_access_tokens) in order
+to access it. You'll need to give the token a name and an expiry date, and choose the
+appropriate scopes. The `api` scope is fine, but if you're only using this token for
+getting registry information, use `read_registry` instead.
+
+For security reasons, this screen will only show you the token's value for as
+long as it is visible - as soon as you move to another page on GitHub, you
+will no longer let you view it. So, take a copy and put it somewhere safe.
+
 Initialisation
 ---
 
