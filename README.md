@@ -166,5 +166,6 @@ Possible improvements
 * A console binary with switches
 * Create a Git release that users can pin to (rather than just `dev:master`)
 * Some integration tests with a real GitLab account
+* Add a live example that readers can examine and modify
 * Put onto Packagist if there's demand
 * See if the `destroy_path` can be used to do registry and image delete operations?
