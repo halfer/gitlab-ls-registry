@@ -152,14 +152,12 @@ class GitLab
     /**
      * Sorting system for registry data
      *
-     * @todo Implement asc/desc sorting
-     *
      * @param string $key
      * @param boolean $ascending
      */
     public function sortImageList($key, $ascending = true)
     {
-        usort($this->imageInfo, function($a, $b) use ($key)
+        usort($this->imageInfo, function($a, $b) use ($key, $ascending)
         {
             if (!isset($a[$key]) || !isset($b[$key]))
             {
@@ -175,7 +173,14 @@ class GitLab
                 return 0;
             }
 
-            return ($va < $vb) ? -1 : 1;
+            if ($ascending)
+            {
+                return ($va < $vb) ? -1 : 1;
+            }
+            else
+            {
+                return ($va > $vb) ? -1 : 1;
+            }
         });
 
         return $this;

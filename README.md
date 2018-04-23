@@ -160,7 +160,7 @@ on a self-hosted instance.
 Possible improvements
 ---
 
-* A descending sort mode
 * A console binary with switches
 * Ask GitLab how stable this API is :)
+* Some integration tests with a real GitLab account
 * Put onto Packagist if there's demand
