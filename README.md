@@ -49,6 +49,8 @@ To create a new instance of the registry lister, run this:
     // Set up the autoloaders
     require_once $root . '/vendor/autoload.php';
 
+    use DockerLs\Registry\GitLab;
+
     $username = '<your-username>';
     $project = '<your-project>';
     $token = '<your-token>';
