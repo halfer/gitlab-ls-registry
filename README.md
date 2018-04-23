@@ -66,7 +66,7 @@ you don't need to set a page number, as it will set this for you, starting at pa
 
     $data = $gitLab
         ->fetchRegistryInfo()
-        ->setResultsPerPage(5)
+        ->setResultsPerPage(20)
         ->fetchAllImages()
         ->sortImageList('total_size')
         ->getImageList();
@@ -85,7 +85,17 @@ If successful, either approach will result in an array of arrays that look like 
 Filtering image information
 ---
 
-TODO
+Image metadata can be filtered using an equality filter. For example, to fetch
+images that match a specific hash:
+
+    $data = $gitLab
+        ->fetchRegistryInfo()
+        ->setResultsPerPage(20)
+        ->fetchAllImages()
+        ->matchFilter('revision', '8b6edd0bdc441fce997c5564c3d8b6eefa894e72261853f85258303ded929d8f')
+        ->getImageList();
+
+Any of the keys in the metadata blocks can be used as a field to filter on.
 
 Testing
 ---
@@ -97,7 +107,6 @@ on a self-hosted instance.
 Improvements
 ---
 
-* Documentation on image filtering
 * A descending sort mode
 * A console binary with switches
 * Autoloading of main classes
