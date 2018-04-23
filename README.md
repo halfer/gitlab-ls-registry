@@ -71,3 +71,20 @@ you don't need to set a page number, as it will set this for you, starting at pa
         ->sortImageList('total_size')
         ->getImageList();
     print_r($data);
+
+If successful, either approach will result in an array of arrays that look like this:
+
+    [name] => v1.01
+    [location] => registry.gitlab.com/jonuser/my-wordpress:v1.01
+    [revision] => 8b6e7c5564c3256eefa894ed8303dd0bdc441fce998bd1853f857226ed929d8f
+    [short_revision] => 8b6e7c556
+    [total_size] => 32049316
+    [created_at] => 2018-04-22T12:23:57.707+00:00
+    [destroy_path] => /jonuser/my-wordpress/registry/repository/84654/tags/v1.01
+
+Improvements
+---
+
+* Matching filter on any image key
+* A console binary with switches
+* Autoloading of main classes
