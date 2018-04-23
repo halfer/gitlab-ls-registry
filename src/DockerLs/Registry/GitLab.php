@@ -153,7 +153,6 @@ class GitLab
      * Sorting system for registry data
      *
      * @todo Implement asc/desc sorting
-     * @todo Throw an error if the specified key does not exist on either side
      *
      * @param string $key
      * @param boolean $ascending
@@ -162,8 +161,15 @@ class GitLab
     {
         usort($this->imageInfo, function($a, $b) use ($key)
         {
-            $va = isset($a[$key]) ? $a[$key] : null;
-            $vb = isset($b[$key]) ? $b[$key] : null;
+            if (!isset($a[$key]) || !isset($b[$key]))
+            {
+                throw new GeneralError(
+                    sprintf('Key `%s` does not exist')
+                );
+            }
+
+            $va = $a[$key];
+            $vb = $b[$key];
             if ($va == $vb)
             {
                 return 0;
