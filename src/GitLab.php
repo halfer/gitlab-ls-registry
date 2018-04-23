@@ -210,6 +210,23 @@ class GitLab
         return $this->imageInfo;
     }
 
+    /**
+     * Gets the number of images in the image list
+     *
+     * @return integer
+     */
+    public function getImageCount()
+    {
+        return count($this->getImageList());
+    }
+
+    /**
+     * Performs an internal curl operation
+     *
+     * @param string $url
+     * @param boolean $convertJson
+     * @return string|array
+     */
     protected function curl($url, $convertJson = true)
     {
         $curl = $this->getCurl();

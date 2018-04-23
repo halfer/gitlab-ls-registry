@@ -108,6 +108,21 @@ images that match a specific hash:
         ->matchFilter('revision', '8b6edd0bdc441fce997c5564c3d8b6eefa894e72261853f85258303ded929d8f')
         ->getImageList();
 
+Counting images
+---
+
+A useful check is to see if something exists already e.g. a tag. To do that, we can
+use the count method:
+
+    echo $gitLab
+        ->fetchRegistryInfo()
+        ->setResultsPerPage(20)
+        ->fetchAllImages()
+        ->matchFilter('name', 'v1.02')
+        ->getImageCount();
+
+This will output an integer, which can be grepped for 0 (i.e. does not exist).
+
 Any of the keys in the metadata blocks can be used as a field to filter on.
 
 Testing
