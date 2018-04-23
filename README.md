@@ -21,10 +21,33 @@ For security reasons, this screen will only show you the token's value for as
 long as it is visible - as soon as you move to another page on GitHub, you
 will no longer let you view it. So, take a copy and put it somewhere safe.
 
+Installation
+---
+
+This repo is not on Packagist, so you'll need to add a custom repo entry in your
+`composer.json`. Something like this should be fine:
+
+    {
+        "require": {
+            "halfer/gitlab-ls-registry": "dev-master"
+        },
+        "repositories": [
+            {
+                "type": "vcs",
+                "url": "https://github.com/halfer/gitlab-ls-registry.git"
+            }
+        ]
+    }
+
+Then do `composer install` or `composer update` in the usual way.
+
 Initialisation
 ---
 
 To create a new instance of the registry lister, run this:
+
+    // Set up the autoloaders
+    require_once $root . '/vendor/autoload.php';
 
     $username = '<your-username>';
     $project = '<your-project>';
@@ -132,8 +155,10 @@ This code was tested on the free version of [hosted GitLab](https://about.gitlab
 I would expect it to work on paid versions in the cloud as well. I have not tested this
 on a self-hosted instance.
 
-Improvements
+Possible improvements
 ---
 
 * A descending sort mode
 * A console binary with switches
+* Ask GitLab how stable this API is :)
+* Put onto Packagist if there's demand
