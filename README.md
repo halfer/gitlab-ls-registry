@@ -163,7 +163,6 @@ on a self-hosted instance.
 Possible improvements
 ---
 
-* Add 'ext-curl' to the Composer dependencies
 * A console binary with switches
 * Create a Git release that users can pin to (rather than just `dev:master`)
 * Some integration tests with a real GitLab account
