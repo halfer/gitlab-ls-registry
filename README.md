@@ -162,5 +162,6 @@ Possible improvements
 
 * A console binary with switches
 * Ask GitLab how stable this API is :)
+* Create a Git release that users can pin to (rather than just `dev:master`)
 * Some integration tests with a real GitLab account
 * Put onto Packagist if there's demand
