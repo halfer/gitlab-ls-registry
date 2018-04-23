@@ -176,6 +176,31 @@ class GitLab
     }
 
     /**
+     * Filter existing results using this key-value pair
+     *
+     * @param string $key
+     * @param mixed $value
+     * @return $this
+     */
+    public function matchFilter($key, $value)
+    {
+        $imageInfo = array_filter(
+            $this->imageInfo,
+            function(array $entry) use ($key, $value)
+            {
+                $thisValue = $entry[$key];
+
+                return $thisValue === $value;
+            }
+        );
+
+        // Renumber the indexes (it feels too flakey to let users rely on it)
+        $this->imageInfo = array_values($imageInfo);
+
+        return $this;
+    }
+
+    /**
      * Gets the currently known image list data
      *
      * @return array
