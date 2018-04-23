@@ -3,10 +3,10 @@ gitlab-ls-registry
 
 This is a simple PHP console command to fetch useful Docker registry data from GitLab. I
 wrote it because I couldn't figure out how to do this (a) the Docker way, or (b) using
-the official GitLab API.
+the official GitLab API. They may be a better way to do this, let me know if so!
 
-It is not finished, but the classes that do exist are pretty self-explanatory. Use
-an IDE to get auto-complete on the `GitLab` class.
+It is a work in progress, but the classes that do exist are pretty self-explanatory.
+Use an IDE to get auto-complete on the `GitLab` class.
 
 Initialisation
 ---
@@ -82,6 +82,11 @@ If successful, either approach will result in an array of arrays that look like 
     [created_at] => 2018-04-22T12:23:57.707+00:00
     [destroy_path] => /jonuser/my-wordpress/registry/repository/84654/tags/v1.01
 
+Filtering image information
+---
+
+TODO
+
 Testing
 ---
 
@@ -92,6 +97,7 @@ on a self-hosted instance.
 Improvements
 ---
 
-* Matching filter on any image key
+* Documentation on image filtering
+* A descending sort mode
 * A console binary with switches
 * Autoloading of main classes
