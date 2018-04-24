@@ -29,7 +29,7 @@ This repo is not on Packagist, so you'll need to add a custom repo entry in your
 
     {
         "require": {
-            "halfer/gitlab-ls-registry": "dev-master"
+            "halfer/gitlab-ls-registry": "v0.1"
         },
         "repositories": [
             {
@@ -169,7 +169,6 @@ Possible improvements
 
 * A console binary with switches
 * More filter devices (greater than, less than, between, contains, etc.)
-* Create a Git release that users can pin to (rather than just `dev:master`)
 * Some integration tests with a real GitLab account
 * Add a live example that readers can examine and modify
 * Put onto Packagist if there's demand
