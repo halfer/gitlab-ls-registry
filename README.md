@@ -160,10 +160,15 @@ This code was tested on the free version of [hosted GitLab](https://about.gitlab
 I would expect it to work on paid versions in the cloud as well. I have not tested this
 on a self-hosted instance.
 
+The code relies on an internal API rather than the public one. I have asked [how stable this
+API is](https://forum.gitlab.com/t/are-the-internal-gitlab-docker-registry-endpoints-stable/15503) i.e.
+whether it can be relied upon.
+
 Possible improvements
 ---
 
 * A console binary with switches
+* More filter devices (greater than, less than, between, contains, etc.)
 * Create a Git release that users can pin to (rather than just `dev:master`)
 * Some integration tests with a real GitLab account
 * Add a live example that readers can examine and modify
