@@ -231,6 +231,20 @@ class GitLab
         return count($this->getImageList());
     }
 
+    public function getDaysOld()
+    {
+        $out = [];
+        foreach ($this->getImageList() as $image)
+        {
+            $strDate = $image['created_at'];
+            # 2018-04-23T20:35:21.798+00:00
+            $strDate = '2018-04-23T20:35:21.798';
+            $createdDate = \DateTime::createFromFormat('Y-m-d\TH:i:s.u', $strDate);
+            /* @var $createdDate \DateTime */
+            echo $createdDate->format('r');
+        }
+    }
+
     /**
      * Performs an internal curl operation
      *
