@@ -24,6 +24,7 @@ class GitLab
     protected $curl;
     protected $registryInfo = [];
     protected $imageInfo = [];
+    protected $debug = false;
 
     public function __construct($userName, $projectName, $privateToken = null)
     {
@@ -43,6 +44,13 @@ class GitLab
     public function setPageNo($pageNo)
     {
         $this->pageNo = (int) $pageNo;
+
+        return $this;
+    }
+
+    public function setDebugMode($debug)
+    {
+        $this->debug = (bool) $debug;
 
         return $this;
     }
@@ -254,9 +262,21 @@ class GitLab
      */
     protected function curl($url, $convertJson = true)
     {
+        if ($this->debug)
+        {
+            echo sprintf("Debug: calling %s\n", $url);
+        }
+
+        $t = microtime(true);
         $curl = $this->getCurl();
         curl_setopt($curl, CURLOPT_URL, $url);
         $data = curl_exec($curl);
+
+        if ($this->debug)
+        {
+            $elapsed = microtime(true) - $t;
+            echo sprintf("Debug: call took %f sec\n", $elapsed);
+        }
 
         if ($convertJson)
         {
