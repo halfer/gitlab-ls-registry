@@ -196,3 +196,4 @@ Possible improvements
 * Add a live example that readers can examine and modify
 * Put onto Packagist if there's demand
 * See if the `destroy_path` can be used to do registry and image delete operations?
+* Allow users to implement their own curl interface e.g. Guzzle
