@@ -68,10 +68,10 @@ Getting registry information
 
 You can get some interesting registry metadata thus:
 
-    $data = $gitLab
+    $registry = $gitLab
         ->fetchRegistryInfo()
         ->getRegistryInfo();
-    print_r($data);
+    print_r($registry);
 
 This will return data that looks like this:
 
@@ -93,25 +93,25 @@ Getting images information
 Here's how to set a page size, retrieving the first available page of data, then sort
 by a key:
 
-    $data = $gitLab
+    $images = $gitLab
         ->fetchRegistryInfo()
         ->setResultsPerPage(5)
         ->setPageNo(1)
         ->fetchImageList()
         ->sortImageList('total_size')
         ->getImageList();
-    print_r($data);
+    print_r($images);
 
 Here is a shortcut method to step through several pages worth of results. In this case
 you don't need to set a page number, as it will set this for you, starting at page 1:
 
-    $data = $gitLab
+    $images = $gitLab
         ->fetchRegistryInfo()
         ->setResultsPerPage(20)
         ->fetchAllImages()
         ->sortImageList('total_size')
         ->getImageList();
-    print_r($data);
+    print_r($images);
 
 If successful, either approach will result in an array of arrays that look like this:
 
@@ -129,7 +129,7 @@ Filtering image information
 Image metadata can be filtered using an equality filter. For example, to fetch
 images that match a specific hash:
 
-    $data = $gitLab
+    $images = $gitLab
         ->fetchRegistryInfo()
         ->setResultsPerPage(20)
         ->fetchAllImages()
@@ -153,12 +153,39 @@ This will output an integer, which can be grepped for 0 (i.e. does not exist).
 
 Any of the keys in the metadata blocks can be used as a field to filter on.
 
+Getting ages of images
+---
+
+You might want to take an action based on the age of an image. For example, you might
+wish to do a clean Docker build with no caching if your image is over a week old. You
+can do that like so:
+
+    $images = $gitLab
+        ->fetchRegistryInfo()
+        ->fetchAllImages()
+        ->sortImageList('created_at')
+        ->matchFilter('name', 'v1.02')
+        ->calculateImageAges()
+        ->getImageList();
+    if ($images && isset($images[0]))
+    {
+        echo $images[0]['created_at_age'];
+    }
+
+This will return the usual image list format, plus a new key, containing the number
+of whole days old the image is:
+
+    [created_at_age] => 2
+
+By default this calculates an age relative to now, but you can supply a custom `DateTime`
+from which ages should be calculated if you wish.
+
 Tips
 ---
 
 If you want to debug the calls being made by curl, there's a debugging mode:
 
-    $list = $gitLab
+    $images = $gitLab
         ->setDebugMode(true)
         ->fetchRegistryInfo()
         ->setResultsPerPage(20)
@@ -197,3 +224,4 @@ Possible improvements
 * Put onto Packagist if there's demand
 * See if the `destroy_path` can be used to do registry and image delete operations?
 * Allow users to implement their own curl interface e.g. Guzzle
+* Allow ages to be calculated for units other than days
