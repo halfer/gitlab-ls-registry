@@ -153,6 +153,29 @@ This will output an integer, which can be grepped for 0 (i.e. does not exist).
 
 Any of the keys in the metadata blocks can be used as a field to filter on.
 
+Tips
+---
+
+If you want to debug the calls being made by curl, there's a debugging mode:
+
+    $list = $gitLab
+        ->setDebugMode(true)
+        ->fetchRegistryInfo()
+        ->setResultsPerPage(20)
+        ->fetchAllImages();
+
+The output will look a bit like this:
+
+    Debug: calling https://gitlab.com/jonuser/my-wordpress/container_registry.json
+    Debug: call took 35.351953 sec
+    Debug: calling https://gitlab.com/jonuser/my-wordpress/registry/repository/12345/tags?format=json&page=1&per_page=20
+    Debug: call took 10.322790 sec
+
+In my experience, the cloud version of GitLab can be a bit slow. If you have a lot of
+images, try increasing your `setResultsPerPage`, it defaults to just 10. This will reduce
+the number of calls required. I don't know what the maximum number of results per page
+is, but it could be found by some simple experimentation.
+
 Testing
 ---
 
