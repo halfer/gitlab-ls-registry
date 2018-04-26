@@ -8,6 +8,7 @@ namespace DockerLs\Registry;
 
 use DockerLs\Registry\Exceptions\RegistryNotFound;
 use DockerLs\Registry\Exceptions\GeneralError;
+use DateTime;
 
 class GitLab
 {
@@ -239,18 +240,34 @@ class GitLab
         return count($this->getImageList());
     }
 
-    public function getDaysOld()
+    /**
+     * Creates an array of "days old" integers for each image in the current list
+     *
+     * This can be used in conjunction with a sort to get the oldest/newest image
+     * in the first element.
+     *
+     * @param DateTime $now
+     * @return array
+     */
+    public function getImageAgeList($now = null)
     {
+        // Set now to now if not supplied
+        if (!$now)
+        {
+            $now = new DateTime();
+        }
+
         $out = [];
         foreach ($this->getImageList() as $image)
         {
             $strDate = $image['created_at'];
-            # 2018-04-23T20:35:21.798+00:00
-            $strDate = '2018-04-23T20:35:21.798';
-            $createdDate = \DateTime::createFromFormat('Y-m-d\TH:i:s.u', $strDate);
+            $createdDate = new DateTime($strDate);
             /* @var $createdDate \DateTime */
-            echo $createdDate->format('r');
+            $interval = $createdDate->diff($now);
+            $out[] = (int) $interval->format('%R%a');
         }
+
+        return $out;
     }
 
     /**
