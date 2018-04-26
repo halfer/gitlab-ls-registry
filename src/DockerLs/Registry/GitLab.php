@@ -241,7 +241,7 @@ class GitLab
     }
 
     /**
-     * Creates an array of "days old" integers for each image in the current list
+     * Adds an image age in days to each entry in the current list
      *
      * This can be used in conjunction with a sort to get the oldest/newest image
      * in the first element.
@@ -249,7 +249,7 @@ class GitLab
      * @param DateTime $now
      * @return array
      */
-    public function getImageAgeList($now = null)
+    public function calculateImageAges($now = null)
     {
         // Set now to now if not supplied
         if (!$now)
@@ -257,17 +257,18 @@ class GitLab
             $now = new DateTime();
         }
 
-        $out = [];
-        foreach ($this->getImageList() as $image)
+        foreach ($this->getImageList() as $ord => $image)
         {
             $strDate = $image['created_at'];
             $createdDate = new DateTime($strDate);
+
             /* @var $createdDate \DateTime */
             $interval = $createdDate->diff($now);
-            $out[] = (int) $interval->format('%R%a');
+            $daysOld = (int) $interval->format('%R%a');
+            $this->imageInfo[$ord]['created_at_age'] = $daysOld;
         }
 
-        return $out;
+        return $this;
     }
 
     /**
