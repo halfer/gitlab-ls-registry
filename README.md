@@ -219,6 +219,7 @@ Possible improvements
 
 * A console binary with switches
 * More filter devices (greater than, less than, between, contains, etc.)
+* A phar file to remove the need to use Composer when installing
 * Some integration tests with a real GitLab account
 * Add a live example that readers can examine and modify
 * Put onto Packagist if there's demand
