@@ -29,7 +29,7 @@ This repo is not on Packagist, so you'll need to add a custom repo entry in your
 
     {
         "require": {
-            "halfer/gitlab-ls-registry": "v0.1"
+            "halfer/gitlab-ls-registry": "v0.11"
         },
         "repositories": [
             {
