@@ -24,22 +24,7 @@ will no longer let you view it. So, take a copy and put it somewhere safe.
 Installation
 ---
 
-This repo is not on Packagist, so you'll need to add a custom repo entry in your
-`composer.json`. Something like this should be fine:
-
-    {
-        "require": {
-            "halfer/gitlab-ls-registry": "v0.1.1"
-        },
-        "repositories": [
-            {
-                "type": "vcs",
-                "url": "https://github.com/halfer/gitlab-ls-registry.git"
-            }
-        ]
-    }
-
-Then do `composer install` or `composer update` in the usual way.
+Installation notes can be [found here](INSTALLATION).
 
 Initialisation
 ---
