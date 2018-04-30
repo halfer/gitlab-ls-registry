@@ -24,7 +24,7 @@ will no longer let you view it. So, take a copy and put it somewhere safe.
 Installation
 ---
 
-Installation notes can be [found here](INSTALLATION).
+Installation notes can be [found here](INSTALLATION.md).
 
 Initialisation
 ---
