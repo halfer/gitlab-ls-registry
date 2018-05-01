@@ -1,5 +1,6 @@
 {
     "name": "halfer/gitlab-ls-registry",
+    "description": "A simple HTTP library to query GitLab's unofficial Docker registry API",
     "require": {
         "ext-json": "*",
         "ext-curl": "*"
