@@ -1,6 +1,7 @@
 {
     "name": "halfer/gitlab-ls-registry",
     "require": {
+        "ext-json": "*",
         "ext-curl": "*"
     },
     "autoload": {
