@@ -247,9 +247,10 @@ class GitLab
      * in the first element.
      *
      * @param DateTime $now
+     * @param string $intervalFormat
      * @return array
      */
-    public function calculateImageAges($now = null)
+    public function calculateImageAges($now = null, $intervalFormat = '%R%a')
     {
         // Set now to now if not supplied
         if (!$now)
@@ -264,7 +265,7 @@ class GitLab
 
             /* @var $createdDate \DateTime */
             $interval = $createdDate->diff($now);
-            $daysOld = (int) $interval->format('%R%a');
+            $daysOld = (int) $interval->format($intervalFormat);
             $this->imageInfo[$ord]['created_at_age'] = $daysOld;
         }
 

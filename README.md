@@ -167,6 +167,9 @@ of whole days old the image is:
 By default this calculates an age relative to now, but you can supply a custom `DateTime`
 from which ages should be calculated if you wish.
 
+The default unit for the age calculator is days. However, you can supply a custom
+parameter
+
 Tips
 ---
 
@@ -214,4 +217,4 @@ Possible improvements
 * Add a live example that readers can examine and modify
 * See if the `destroy_path` can be used to do registry and image delete operations?
 * Allow users to implement their own curl interface using [HTTPlug](http://httplug.io/)
-* Allow ages to be calculated for units other than days
+* Add a license for Packagist
