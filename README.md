@@ -168,7 +168,7 @@ By default this calculates an age relative to now, but you can supply a custom `
 from which ages should be calculated if you wish.
 
 The default unit for the age calculator is days. However, you can supply a custom
-parameter
+DateTimeInterval format string, for example if you wanted the age in hours instead.
 
 Tips
 ---
