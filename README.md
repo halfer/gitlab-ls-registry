@@ -206,7 +206,6 @@ Possible improvements
 * More filter devices (greater than, less than, between, contains, etc.)
 * Some integration tests with a real GitLab account
 * Add a live example that readers can examine and modify
-* Put onto Packagist if there's demand
 * See if the `destroy_path` can be used to do registry and image delete operations?
 * Allow users to implement their own curl interface e.g. Guzzle
 * Allow ages to be calculated for units other than days
