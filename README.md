@@ -201,6 +201,10 @@ The code relies on an internal API rather than the public one. I have asked [how
 API is](https://forum.gitlab.com/t/are-the-internal-gitlab-docker-registry-endpoints-stable/15503) i.e.
 whether it can be relied upon.
 
+This library will become redundant if GitLab add registry endpoints to their official
+API. If that happens, there are established libraries that will be much better tested,
+for example [this one](https://github.com/m4tthumphrey/php-gitlab-api).
+
 Possible improvements
 ---
 
@@ -209,5 +213,5 @@ Possible improvements
 * Some integration tests with a real GitLab account
 * Add a live example that readers can examine and modify
 * See if the `destroy_path` can be used to do registry and image delete operations?
-* Allow users to implement their own curl interface e.g. Guzzle
+* Allow users to implement their own curl interface using [HTTPlug](http://httplug.io/)
 * Allow ages to be calculated for units other than days
