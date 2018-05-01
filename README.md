@@ -1,6 +1,8 @@
 gitlab-ls-registry
 ===
 
+[![Latest Stable Version](https://poser.pugx.org/halfer/gitlab-ls-registry/v/stable)](https://packagist.org/packages/halfer/gitlab-ls-registry)
+
 This is a simple PHP console command to fetch useful Docker registry data from GitLab. I
 wrote it because I couldn't figure out how to do this (a) the Docker way, or (b) using
 the official GitLab API. They may be a better way to do this, let me know if so!
