@@ -7,19 +7,13 @@ the most convenient, but either will work just as well.
 Composer
 ---
 
-This repo is not on Packagist, so you'll need to add a custom repo entry in your
-`composer.json`. Something like this should be fine:
+This [repo is on Packagist](https://packagist.org/packages/halfer/gitlab-ls-registry), so
+something like this should be fine:
 
     {
         "require": {
-            "halfer/gitlab-ls-registry": "v0.1.1"
-        },
-        "repositories": [
-            {
-                "type": "vcs",
-                "url": "https://github.com/halfer/gitlab-ls-registry.git"
-            }
-        ]
+            "halfer/gitlab-ls-registry": "v0.1.*"
+        }
     }
 
 Then do `composer install` or `composer update` in the usual way.
