@@ -20,7 +20,7 @@ appropriate scopes. The `api` scope is fine, but if you're only using this token
 getting registry information, use `read_registry` instead.
 
 For security reasons, this screen will only show you the token's value for as
-long as it is visible - as soon as you move to another page on GitHub, you
+long as it is visible - as soon as you move to another page on GitLab, you
 will no longer let you view it. So, take a copy and put it somewhere safe.
 
 Installation
