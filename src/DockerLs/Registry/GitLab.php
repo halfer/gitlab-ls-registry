@@ -297,6 +297,12 @@ class GitLab
             echo sprintf("Debug: call took %f sec\n", $elapsed);
         }
 
+        $httpStatus = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        if ($httpStatus === 401)
+        {
+            throw new Exceptions\UnauthorizedError();
+        }
+
         if ($convertJson)
         {
             $data = json_decode($data, true);

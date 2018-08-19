@@ -6,3 +6,4 @@
 require_once __DIR__ . '/src/DockerLs/Registry/GitLab.php';
 require_once __DIR__ . '/src/DockerLs/Registry/Exceptions/GeneralError.php';
 require_once __DIR__ . '/src/DockerLs/Registry/Exceptions/RegistryNotFound.php';
+require_once __DIR__ . '/src/DockerLs/Registry/Exceptions/UnauthorizedError.php';
