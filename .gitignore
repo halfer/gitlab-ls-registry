@@ -5,5 +5,8 @@ vendor/
 box
 composer
 
+# Ignore config
+/.config_*
+
 # Ignore IDE
 /nbproject/
