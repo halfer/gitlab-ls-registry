@@ -1,0 +1,11 @@
+{
+    "base-path": ".",
+    "files": [
+        "src/DockerLs/Registry/GitLab.php",
+        "src/DockerLs/Registry/Exceptions/GeneralError.php",
+        "src/DockerLs/Registry/Exceptions/RegistryNotFound.php",
+        "src/DockerLs/Registry/Exceptions/UnauthorizedError.php",
+        "index.php"
+    ],
+    "output": "builds/gitlab-ls-registry-0.1.2.phar"
+}
