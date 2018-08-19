@@ -23,6 +23,7 @@ class GitLab
 
     // Internals
     protected $curl;
+    protected $lastHttpStatus;
     protected $registryInfo = [];
     protected $imageInfo = [];
     protected $debug = false;
@@ -272,6 +273,18 @@ class GitLab
         return $this;
     }
 
+    public function deleteImages($registryUrl)
+    {
+        foreach ($this->getImageList() as $image)
+        {
+            $destroyPath = $registryUrl . $image['destroy_path'];
+            print_r($image);
+            $response = $this->curl($destroyPath, true, 'POST');
+            print_r($response);
+            echo $this->lastHttpStatus . "\n";
+        }
+    }
+
     /**
      * Performs an internal curl operation
      *
@@ -279,7 +292,7 @@ class GitLab
      * @param boolean $convertJson
      * @return string|array
      */
-    protected function curl($url, $convertJson = true)
+    protected function curl($url, $convertJson = true, $method = 'GET')
     {
         if ($this->debug)
         {
@@ -289,6 +302,11 @@ class GitLab
         $t = microtime(true);
         $curl = $this->getCurl();
         curl_setopt($curl, CURLOPT_URL, $url);
+        if ($method !== 'GET')
+        {
+            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method);
+            curl_setopt($curl, CURLOPT_HEADER, 'Content-length: 0');
+        }
         $data = curl_exec($curl);
 
         if ($this->debug)
@@ -302,6 +320,7 @@ class GitLab
         {
             throw new Exceptions\UnauthorizedError();
         }
+        $this->lastHttpStatus = $httpStatus;
 
         if ($convertJson)
         {
