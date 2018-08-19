@@ -1,5 +1,9 @@
 # Ignore dependencies
 vendor/
 
+# Ignore local commands
+box
+composer
+
 # Ignore IDE
 /nbproject/
