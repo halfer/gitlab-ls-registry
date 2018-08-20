@@ -215,6 +215,7 @@ Possible improvements
 * More filter devices (greater than, less than, between, contains, etc.)
 * Some integration tests with a real GitLab account
 * Add a live example that readers can examine and modify
-* See if the `destroy_path` can be used to do registry and image delete operations?
 * Allow users to implement their own curl interface using [HTTPlug](http://httplug.io/)
 * Add a license for Packagist
+* I had hoped the `destroy_path` can be used to do registry and image delete operations, but it
+  looks like [the answer is no](https://github.com/halfer/gitlab-ls-registry/issues/2)
