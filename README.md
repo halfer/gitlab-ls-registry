@@ -10,6 +10,16 @@ the official GitLab API. They may be a better way to do this, let me know if so!
 It is a work in progress, but the classes that do exist are pretty self-explanatory.
 Use an IDE to get auto-complete on the `GitLab` class.
 
+Uncertain API status
+---
+
+Update: as of November 2018, it seems that the [internal registry API](https://gitlab.com/gitlab-org/gitlab-ce/issues/21608#note_120874326)
+on the public gitlab.com instance no longer works with tokens. Pull requests to this
+project to repair this are most welcome. I may find time to do this myself, but presently
+I do not hold much hope that GitLab won't break backwards compatibility again.
+
+Any readers that wish to discuss this are welcome to raise a ticket in GitHub.
+
 Private registries
 ---
 
